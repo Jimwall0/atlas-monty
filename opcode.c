@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 /**
  * push - pushes onto the stack
  * @stack: stack
@@ -25,5 +25,21 @@ void push(stack_t **stack, unsigned int line_number)
 		node->next = *stack;
 		(*stack)->prev = node;
 		*stack = node;
+	}
+}
+/**
+ * pall - prints all nodes
+ * @stack: the stack of nodes
+ * @line_number: the n data
+*/
+void pall(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+
+	(void)line_number;
+	while (temp != NULL)
+	{
+		printf("%d\n", temp->n);
+		temp = temp->next;
 	}
 }

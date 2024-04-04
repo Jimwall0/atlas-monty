@@ -39,7 +39,7 @@ typedef struct instruction_s
 
 int main(int ac, char **av);
 void user_input(char *buffer, char **array);
-void (*find_function())(stack_t **stack, unsigned int line_number);
+void (*find_function(char *string))(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 

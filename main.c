@@ -1,4 +1,5 @@
 #include "monty.h"
+#include "opcode.c"
 /**
  * main - runs the programs
  * @ac: number of arguement
@@ -7,9 +8,11 @@
 */
 int main(int ac, char **av)
 {
-	char *input = NULL, *buffer = NULL, **array;
+	char *buffer = NULL, **array;
 	size_t size = 1024;
 	int characters = 0;
+	stack_t *head = NULL;
+	void (*find_function(char *string))(stack_t **stack, unsigned int line_number);
 
 	(void)av;
 	if (ac < 2)/*if there is less then two arguements don't run*/
@@ -27,10 +30,10 @@ int main(int ac, char **av)
 			free (buffer);
 			return (0);
 		}
-		while (1)
+		while (1)/*infinite loop*/
 		{
 			characters = getline(&buffer, &size, stdin);
-			if (character == EOF)
+			if (characters == EOF)/*exit when EOF reached*/
 			{
 				free(array);
 				free(buffer);
