@@ -34,4 +34,7 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+int user_input(char num, char **buffer, size_t size);
+int find_function(char *string);
+
 #endif

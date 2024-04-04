@@ -18,13 +18,8 @@ int user_input(int num, char **buffer, size_t size)
 			perror("Error: getline\n");
 			exit(1);
 		}
-		/*stores the input into a pointer array*/
-		pt = strtok(buffer, " \n");
-		for (; pt; loop++)
-		{
-			
-			stringpt[loop] = pt;
-			pt = strtok(NULL, " \n");
-		}
+		/*token it and compare it*/	
+		pt = strtok(buffer);
+		find_function(pt);
 	}
 }
