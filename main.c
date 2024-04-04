@@ -8,6 +8,7 @@ int main(int ac, char **ac)
 	int number = 0, loop;
 	char *buffer = NULL, *pt = NULL, **array;
 	size_t size = 1024;
+	void (*f)(stack_t **stack, unsigned int line_number);
 
 	(void)ac;
 	(void)av;
@@ -29,12 +30,33 @@ int main(int ac, char **ac)
 			exit(0);
 		}
 		pt = strtok(buffer, "$ \n");/*splits of whitespace*/
-		for (loop = 0; loop < 2; loop++)
+		for (loop = 0; loop < 2; loop++)/*stores strtok into an array*/
 		{
 			array[loop] = pt;
 			pt = strtok(NULL, "$ \n");
-			printf("%s\n", array[loop]);
+			find_function(array[0]);
 		}
 	}
 	return (0);
+}
+
+/**
+ * find_function - finds a function based of input
+ * Return: pointer function
+*/
+void *find_function(char *string)
+{
+	int number = 0;
+	instruction_t fab = {
+		{"push", push};
+		{"pull", pull};
+	};
+
+	while (number < 2)/*loops through the struct to match strings*/
+	{
+		if (strcmp(string, fab[number].opcode) == 0)
+			return (fab[number].f);
+		number++;
+	}
+	return(NULL);
 }
