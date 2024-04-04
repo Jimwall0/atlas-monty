@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 /**
  * find_function - finds a function based of input
  * Return: pointer function

@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef MONTY_H
+#define MONTY_H
 #define EXIT_FAILURE 1
 #include <stdio.h>
 #include <string.h>
@@ -36,7 +36,7 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-int main(void);
+int main(int ac, char **av);
 int user_input(char num, char **buffer, size_t size);
 void *find_function(char *string);
 
