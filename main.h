@@ -1,8 +1,10 @@
-#include MAIN_H
+#ifndef MAIN_H
 #define MAIN_H
+#define EXIT_FAILURE 1
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -34,6 +36,7 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+int main(void);
 int user_input(char num, char **buffer, size_t size);
 void *find_function(char *string);
 
