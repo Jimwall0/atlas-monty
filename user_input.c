@@ -11,15 +11,13 @@ int user_input(int num, char **buffer, size_t size)
 	stringpt = malloc(sizeof(char *));
 	while (1)
 	{
-		/*gets the input from file until EOF*/
-		character = getline(&buffer, &size, stdin);
+		character = getline(&buffer, &size, stdin);/*gets the input from file until EOF*/
 		if (character == -1)
 		{
 			perror("Error: getline\n");
 			exit(1);
-		}
-		/*token it and compare it*/	
-		pt = strtok(buffer);
-		find_function(pt);
+		}	
+		pt = strtok(buffer);/*token it*/
 	}
+	return (pt);
 }
