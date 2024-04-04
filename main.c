@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "opcode.c"
 /**
  * main - runs the programs
  * @ac: number of arguement
