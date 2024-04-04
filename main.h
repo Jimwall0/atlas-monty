@@ -35,6 +35,6 @@ typedef struct instruction_s
 } instruction_t;
 
 int user_input(char num, char **buffer, size_t size);
-int find_function(char *string);
+void *find_function(char *string);
 
 #endif
