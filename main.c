@@ -7,10 +7,10 @@
 */
 int main(int ac, char **av)
 {
-	char *buffer = NULL, **array;
+	char *buffer = NULL;
 	size_t size = 1024;
 	int characters = 0;
-	stack_t *head = NULL;
+	stack_t *head = NULL, *temp;
 	void (*find_function(char *string))(stack_t **stack, unsigned int line_number);
 
 	(void)av;
@@ -22,24 +22,21 @@ int main(int ac, char **av)
 			free(buffer);
 			return (0);
 		}
-		array = malloc(sizeof(char *));
-		if (array == NULL)
-		{
-			free (array);
-			free (buffer);
-			return (0);
-		}
 		while (1)/*infinite loop*/
 		{
 			characters = getline(&buffer, &size, stdin);
 			if (characters == EOF)/*exit when EOF reached*/
 			{
-				free(array);
+				while (head != NULL)
+				{
+					temp = head;
+					head = head->next;
+					free(temp);
+				}
 				free(buffer);
 				return (0);
 			}
-			user_input(buffer, array);/*tokens the buffer and stores it into array*/
-			(find_function(array[0]))(&head, atoi(array[1]));
+			(find_function(strtok(buffer, " $\n")))(&head, atoi(strtok(NULL, " $\n")));/*plugs in function*/
 		}
 	}
 	return (0);
@@ -65,19 +62,4 @@ void (*find_function(char *string))(stack_t **stack, unsigned int line_number)
 		number++;
 	}
 	return (NULL);
-}
-
-/**
- * user_input - deals with the input
- * @buffer: buffer area for input
- * Return: head of struct
-*/
-void user_input(char *buffer, char **array)
-{
-	char *tok;
-
-	tok = strtok(buffer, " $\n");
-	array[0] = tok;
-	tok = strtok(NULL, " $\n");
-	array[1] = tok;
 }
