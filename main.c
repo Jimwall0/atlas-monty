@@ -10,7 +10,7 @@ int main(int ac, char **av)
 	char *buffer = NULL;
 	size_t size = 1024;
 	int characters = 0;
-	stack_t *head = NULL, *temp;
+	stack_t *head = NULL, *temp = head;
 	void (*find_function(char *string))(stack_t **stack, unsigned int line_number);
 
 	(void)av;
@@ -39,7 +39,8 @@ int main(int ac, char **av)
 			(find_function(strtok(buffer, " $\n")))(&head, atoi(strtok(NULL, " $\n")));/*plugs in function*/
 		}
 	}
-	return (0);
+	perror("Error: ac\n");
+	return (1);
 }
 
 /**

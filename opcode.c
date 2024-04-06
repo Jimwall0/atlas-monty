@@ -15,7 +15,13 @@ void push(stack_t **stack, unsigned int line_number)
 		perror("Error: push\n");
 		exit(1);
 	}
-	node->n = line_number;/*sets the n variable*/
+	if (line_number != (unsigned int)line_number)
+	{
+		printf("L<%d>: usage: push integer\n", line_number);
+		free(node);
+		exit(EXIT_FAILURE);
+	}
+	node->n = line_number;
 	if (*stack == NULL)/*if empty set to head*/
 	{
 		*stack = node;
