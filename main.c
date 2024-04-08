@@ -7,37 +7,42 @@
 */
 int main(int ac, char **av)
 {
-	char *buffer, *pt;
+	char *buffer;
 	int characters = 0;
 	size_t size = 1024;
 	stack_t *head = NULL;
+	void (*find_function(char *string))(stack_t **stack, unsigned int line_number);
 
 	if (ac != 2)
 	{
 		perror("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	buffer = malloc(sizeof(char *));
+	buffer = malloc(sizeof(char) * size);
 	if (buffer == NULL)
 	{
 		free(buffer);
 		perror("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	if (stat(stdin))
+	if (access(av[1], R_OK & X_OK))
 	{
 		while (1)
 		{
 			characters = getline(&buffer, &size, stdin);
 			if (characters == EOF)
 				return (0);
-			pt = strtok(buffer, " $\n");
-			(getfunction())(&head, strtok(NULL, " $\n"));
+			strtok(buffer, " $]n");
+			if (atoi(strtok(NULL, " $\n")) == 0)
+			{
+
+			}
+			(find_function(strtok(buffer, " $\n")))(&head, atoi(strtok(NULL, " $\n")));
 		}
 	}
 	else
 	{
-		perror("Error: Can't open file\n");
+		perror("Error: file access\n");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -53,7 +58,7 @@ void (*find_function(char *string))(stack_t **stack, unsigned int line_number)
 	instruction_t fab[] = {
 		{"push", push},
 		{"pall", pall},
-		{"", napp}
+		{"shrug", napp}
 	};
 
 	while (number < 2)/*loops through the struct to match strings*/

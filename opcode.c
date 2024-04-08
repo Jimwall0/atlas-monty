@@ -12,12 +12,8 @@ void push(stack_t **stack, unsigned int line_number)
 	if (node == NULL)
 	{
 		free(node);
+		perror("Error: node malloc\n");
 		exit(EXIT_FAILURE);
-	}
-	if (line_number == 0)
-	{
-		free(node);
-		exit()
 	}
 	node->n = line_number;
 	if (*stack == NULL)/*if empty set to head*/
@@ -43,8 +39,6 @@ void pall(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	while (temp != NULL)
 	{
-		if (temp->n == 0)
-			exit(EXIT_SUCCESS);
 		printf("%d\n", temp->n);
 		temp = temp->next;
 	}
@@ -58,5 +52,5 @@ void napp(stack_t **stack, unsigned int line_number)
 {
 	(void)line_number;
 	(void)stack;
-	fprintf("L<line_number>: unknown instruction <opcode>", line_number)
+	perror("Error: unkown instruction\n");
 }
