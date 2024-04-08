@@ -12,14 +12,12 @@ void push(stack_t **stack, unsigned int line_number)
 	if (node == NULL)
 	{
 		free(node);
-		perror("Error: push\n");
-		exit(1);
-	}
-	if (line_number != (unsigned int)line_number)
-	{
-		printf("L<%d>: usage: push integer\n", line_number);
-		free(node);
 		exit(EXIT_FAILURE);
+	}
+	if (line_number == 0)
+	{
+		free(node);
+		exit()
 	}
 	node->n = line_number;
 	if (*stack == NULL)/*if empty set to head*/
@@ -45,7 +43,20 @@ void pall(stack_t **stack, unsigned int line_number)
 	(void)line_number;
 	while (temp != NULL)
 	{
+		if (temp->n == 0)
+			exit(EXIT_SUCCESS);
 		printf("%d\n", temp->n);
 		temp = temp->next;
 	}
+}
+/**
+ * napp - not a code
+ * @stack: stack data
+ * @line_number: the line number
+*/
+void napp(stack_t **stack, unsigned int line_number)
+{
+	(void)line_number;
+	(void)stack;
+	fprintf("L<line_number>: unknown instruction <opcode>", line_number)
 }

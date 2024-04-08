@@ -7,40 +7,39 @@
 */
 int main(int ac, char **av)
 {
-	char *buffer = NULL;
-	size_t size = 1024;
+	char *buffer, *pt;
 	int characters = 0;
-	stack_t *head = NULL, *temp = head;
-	void (*find_function(char *string))(stack_t **stack, unsigned int line_number);
+	size_t size = 1024;
+	stack_t *head = NULL;
 
-	(void)av;
-	if (ac < 2)/*if there is less then two arguements don't run*/
+	if (ac != 2)
 	{
-		buffer = malloc(sizeof(char) * size);/*malloc here so it's easier to keep track of*/
-		if (buffer == NULL)
-		{
-			free(buffer);
-			return (0);
-		}
-		while (1)/*infinite loop*/
+		perror("USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
+	buffer = malloc(sizeof(char *));
+	if (buffer == NULL)
+	{
+		free(buffer);
+		perror("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
+	if (stat(stdin))
+	{
+		while (1)
 		{
 			characters = getline(&buffer, &size, stdin);
-			if (characters == EOF)/*exit when EOF reached*/
-			{
-				while (head != NULL)
-				{
-					temp = head;
-					head = head->next;
-					free(temp);
-				}
-				free(buffer);
+			if (characters == EOF)
 				return (0);
-			}
-			(find_function(strtok(buffer, " $\n")))(&head, atoi(strtok(NULL, " $\n")));/*plugs in function*/
+			pt = strtok(buffer, " $\n");
+			(getfunction())(&head, strtok(NULL, " $\n"));
 		}
 	}
-	perror("Error: ac\n");
-	return (1);
+	else
+	{
+		perror("Error: Can't open file\n");
+		exit(EXIT_FAILURE);
+	}
 }
 
 /**
@@ -53,7 +52,8 @@ void (*find_function(char *string))(stack_t **stack, unsigned int line_number)
 	int number = 0;
 	instruction_t fab[] = {
 		{"push", push},
-		{"pall", pall}
+		{"pall", pall},
+		{"", napp}
 	};
 
 	while (number < 2)/*loops through the struct to match strings*/
@@ -62,5 +62,5 @@ void (*find_function(char *string))(stack_t **stack, unsigned int line_number)
 			return (fab[number].f);
 		number++;
 	}
-	return (NULL);
+	return (fab[number].f);
 }
